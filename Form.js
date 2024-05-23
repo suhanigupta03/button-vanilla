@@ -1,11 +1,14 @@
-function getCurrentURL() {
-    var currentURL = window.location.href;
-    alert("Current URL: " + currentURL);
-}
-var button = document.createElement('button');
-button.textContent = 'Get Current URL';
-
-button.addEventListener('click', getCurrentURL);
-
-var buttonContainer = document.getElementById('buttonContainer');
-buttonContainer.appendChild(button);
+function addButton() {
+    const button = document.createElement('button');
+    button.textContent = 'Get URL';
+    button.addEventListener('click', getUrl);
+    document.body.appendChild(button);
+  }
+  
+  function getUrl() {
+    const currentUrl = window.location.href;
+    alert('Current URL: ' + currentUrl);
+  }
+  
+  // Call addButton function when the script is loaded
+  addButton();
