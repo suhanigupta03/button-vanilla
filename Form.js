@@ -356,7 +356,7 @@ function submitForm(event) {
       email: document.getElementById('email').value,
       whatsappNo: document.getElementById('whatsappNo').value,
       fatherName: document.getElementById('fatherName').value,
-      address: document.getElementById('address').value,
+    
       city: document.getElementById('city').value,
       state: document.getElementById('state').value,
       courseSelection: document.getElementById('courseSelection').value,
