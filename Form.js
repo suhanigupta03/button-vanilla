@@ -1,5 +1,8 @@
-let data22 = document.currentScript
-console.log(data22)
+let scriptTag = document.currentScript
+console.log(scriptTag)
+let realdata = data22.getAttribute("data")
+console.log(realdata);
+
 document.addEventListener('DOMContentLoaded', () => {
   
   const scriptElement = document.querySelector('script[src="Form.js"]');
