@@ -1,4 +1,4 @@
-body {
+/* body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -80,4 +80,100 @@ body {
       width: 50%;
     }
   }
-  
+   */
+   body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #28a745, #17a2b8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+form {
+    background: rgba(255, 255, 255, 0.9); 
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 70%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #007bff;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 80px;
+}
+
+button.submit-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.inline-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.inline-group .form-group {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.inline-group .form-group:last-child {
+    margin-right: 0;
+}
+
+@media screen and (min-width: 600px) {
+    form {
+        width: 70%;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    form {
+        width: 50%;
+    }
+}
+
