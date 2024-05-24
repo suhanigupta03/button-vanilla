@@ -362,7 +362,7 @@ function submitForm(event) {
       agreeCheckbox: document.getElementById('agreeCheckbox').checked
   };
 
-  // Check if courseSelection is "Select Course"
+ 
   if (formData.courseSelection === "Select Course") {
       alert("Please select a course.");
       return; // Prevent form submission
