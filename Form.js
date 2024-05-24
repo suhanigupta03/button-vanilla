@@ -212,7 +212,9 @@ function createForm(courseOptions) {
   const fieldOptions = [
       { labelText: "Student's Name:", inputType: 'text', inputId: 'studentName', inputName: 'studentName', required: true },
       { labelText: 'Contact No.:', inputType: 'tel', inputId: 'contactNo', inputName: 'contactNo', required: true },
+      { labelText: 'OTP:', inputType: 'tel', inputId: 'contactNo', inputName: 'contactNo', required: true },
       { labelText: 'E-mail:', inputType: 'email', inputId: 'email', inputName: 'email', required: true },
+      { labelText: 'OTP:', inputType: 'tel', inputId: 'contactNo', inputName: 'contactNo', required: true },
       { labelText: 'Whatsapp No.:', inputType: 'tel', inputId: 'whatsappNo', inputName: 'whatsappNo', required: false },
       { labelText: "Father's Name:", inputType: 'text', inputId: 'fatherName', inputName: 'fatherName', required: true },
       // { labelText: 'Address:', inputType: 'textarea', inputId: 'address', inputName: 'address', required: true },
@@ -362,7 +364,7 @@ function submitForm(event) {
       agreeCheckbox: document.getElementById('agreeCheckbox').checked
   };
 
- 
+  // Check if courseSelection is "Select Course"
   if (formData.courseSelection === "Select Course") {
       alert("Please select a course.");
       return; // Prevent form submission
