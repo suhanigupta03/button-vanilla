@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const path = scriptElement.getAttribute('path');
     const courses = scriptElement.getAttribute('courses')
     const styles = scriptElement.getAttribute('styles')
+    const logo = scriptElement.getAttribute('logo');
+    const contact = scriptElement.getAttribute('contact');
     if (styles) {
      
       const customStylesheet = document.querySelectorAll('link[rel="stylesheet"]');
@@ -32,17 +34,21 @@ document.addEventListener('DOMContentLoaded', () => {
   
     const currentPath = window.location.pathname;
     
-    if (path.includes(currentPath)) {
-        createForm(courses,styles);
-        toggleFormStyle(styles)
+    
+    if (JSON.parse(path).includes(currentPath)) {
+      createForm(courses, styles, logo, contact);
+        toggleFormStyle(styles);
+      
 
     }
     console.log(path);
     console.log(courses);
-    
+    console.log(path.includes(currentPath))
   });
   
-  function createForm(courseOptions,styles) {
+ 
+
+function createForm(courseOptions, styles, logo, contact) {
     // const form = document.createElement('form');
     // form.id = 'studentDetailsForm';
     // document.body.appendChild(form);
@@ -50,19 +56,48 @@ document.addEventListener('DOMContentLoaded', () => {
     formContainer.id = 'formContainer';
     formContainer.classList.add(styles);
     document.body.appendChild(formContainer);
+    const header = document.createElement('header');
+header.classList.add('formWrapper');
+formContainer.insertBefore(header, formContainer.firstChild);
+const logoAndContactContainer = document.createElement('div');
+logoAndContactContainer.classList.add('logo-contact-container');
+header.appendChild(logoAndContactContainer);
+
+// Create and style logo
+const logoElement = document.createElement('img');
+logoElement.src = logo || 'Careerkick.png'; // replace 'logo.png' with the actual path to your logo image
+logoElement.alt = 'Company Logo';
+logoElement.classList.add('logo-style'); // add appropriate styles to logo
+logoAndContactContainer.appendChild(logoElement);
+
+// Create and style contact number
+const contactElement = document.createElement('div');
+contactElement.textContent = 'Contact us: ' + contact; // replace with your contact number
+contactElement.classList.add('contact-style'); // add appropriate styles to contact number
+logoAndContactContainer.appendChild(contactElement);
     const form = document.createElement('form');
     form.id = 'studentDetailsForm';
     form.classList.add('formWrapper');
     formContainer.appendChild(form);
-  
+    // const logoElement = document.createElement('img');
+    // logoElement.src = logo; // replace 'logo.png' with the actual path to your logo image
+    // logoElement.alt = 'Company Logo';
+    // logoElement.classList.add('logo-style'); // add appropriate styles to logo
+    // header.appendChild(logoElement);
+
+    // // Create and style contact number
+    // const contactElement = document.createElement('div');
+    // contactElement.textContent = 'Contact us: ' + contact; // replace with your contact number
+    // contactElement.classList.add('contact-style'); // add appropriate styles to contact number
+    // header.appendChild(contactElement);
     const fieldOptions = [
-        { labelText: "Student's Name:", inputType: 'text', inputId: 'studentName', inputName: 'studentName', required: true },
-        { labelText: 'Contact No.:', inputType: 'tel', inputId: 'contactNo', inputName: 'contactNo', required: true },
-        { labelText: 'OTP:', inputType: 'tel', inputId: 'contactNo', inputName: 'contactNo', required: true },
-        { labelText: 'E-mail:', inputType: 'email', inputId: 'email', inputName: 'email', required: true },
-        { labelText: 'OTP:', inputType: 'tel', inputId: 'contactNo', inputName: 'contactNo', required: true },
-        { labelText: 'Whatsapp No.:', inputType: 'tel', inputId: 'whatsappNo', inputName: 'whatsappNo', required: false },
-        { labelText: "Father's Name:", inputType: 'text', inputId: 'fatherName', inputName: 'fatherName', required: true },
+        { placeholder: "Student's Name:", inputType: 'text', inputId: 'studentName', inputName: 'studentName', required: true },
+        { placeholder: 'Contact No.:', inputType: 'tel', inputId: 'contactNo', inputName: 'contactNo', required: true },
+        { placeholder: 'OTP:', inputType: 'tel', inputId: 'contactNo', inputName: 'contactNo', required: true },
+        { placeholder: 'E-mail:', inputType: 'email', inputId: 'email', inputName: 'email', required: true },
+        { placeholder: 'OTP:', inputType: 'tel', inputId: 'contactNo', inputName: 'contactNo', required: true },
+        { placeholder:'Whatsapp No.:', inputType: 'tel', inputId: 'whatsappNo', inputName: 'whatsappNo', required: false },
+        { placeholder: "Father's Name:", inputType: 'text', inputId: 'fatherName', inputName: 'fatherName', required: true },
         // { labelText: 'Address:', inputType: 'textarea', inputId: 'address', inputName: 'address', required: true },
         // { labelText: 'City:', inputType: 'text', inputId: 'city', inputName: 'city', required: true },
         // { labelText: 'State:', inputType: 'text', inputId: 'state', inputName: 'state', required: true }
@@ -74,19 +109,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const inlineGroup = document.createElement('div');
       inlineGroup.className = 'inline-group';
   
-      createField(inlineGroup, { labelText: 'City:', inputType: 'text', inputId: 'city', inputName: 'city', required: true });
-      createField(inlineGroup, { labelText: 'State:', inputType: 'text', inputId: 'state', inputName: 'state', required: true });
+      createField(inlineGroup, { placeholder: 'City/District:', inputType: 'text', inputId: 'city', inputName: 'city', required: true });
+      createField(inlineGroup, { placeholder: 'State:', inputType: 'text', inputId: 'state', inputName: 'state', required: true });
   
       form.appendChild(inlineGroup);
   
     const courseSelectWrapper = document.createElement('div');
     courseSelectWrapper.className = 'form-group';
-    createSelectField(courseSelectWrapper, 'Course Selection:', 'courseSelection', 'courseSelection', courseOptions);
+    createSelectField(courseSelectWrapper, '', 'courseSelection', 'courseSelection', courseOptions);
     form.appendChild(courseSelectWrapper);
   
-    createField(form, { labelText: 'NEET Score:', inputType: 'number', inputId: 'neetScore', inputName: 'neetScore', required: true});
+    createField(form, { placeholder: 'NEET Score:', inputType: 'number', inputId: 'neetScore', inputName: 'neetScore', required: true});
+    createField(form, { placeholder: 'NEET AIR:', inputType: 'number', inputId: 'neetScore', inputName: 'neetScore', required: true});
     
-    //hostname checker
     if (window.location.hostname === 'abhigyadufare.github.io') {
       createField(form, { labelText: 'Preferred College:', inputType: 'text', inputId: 'preferredCollege', inputName: 'preferredCollege', required: true });
   }
@@ -106,17 +141,56 @@ document.addEventListener('DOMContentLoaded', () => {
     formContainer.className = '';
     formContainer.classList.add(styles); 
   }
-  function createField(form, field) {
-    const { labelText, inputType, inputId, inputName, required } = field;
+  function addLogoAndContact(logo, contact) {
+    const header = document.createElement('div');
+    header.id = 'header';
+    document.body.insertBefore(header, document.body.firstChild);
+
+    // Create and style logo
+    const logoElement = document.createElement('img');
+    logoElement.src = logo; // replace 'logo.png' with the actual path to your logo image
+    logoElement.alt = 'Company Logo';
+    logoElement.classList.add('logo-style'); // add appropriate styles to logo
+    header.appendChild(logoElement);
+
+    // Create and style contact number
+    const contactElement = document.createElement('div');
+    contactElement.textContent = 'Contact us: ' + contact; // replace with your contact number
+    contactElement.classList.add('contact-style'); // add appropriate styles to contact number
+    header.appendChild(contactElement);
+}
+//   function createField(form, field) {
+//     // const { labelText, inputType, inputId, inputName, required } = field;
   
+//     // const wrapper = document.createElement('div');
+//     // wrapper.className = 'form-group';
+  
+//     // const label = document.createElement('label');
+//     // label.textContent = labelText;
+//     // label.htmlFor = inputId;
+//     // wrapper.appendChild(label);
+  
+//     // let input;
+//     // if (inputType === 'textarea') {
+//     //     input = document.createElement('textarea');
+//     // } else {
+//     //     input = document.createElement('input');
+//     //     input.type = inputType;
+//     // }
+//     // input.id = inputId;
+//     // input.name = inputName;
+//     // input.required = required;
+//     // wrapper.appendChild(input);
+  
+//     // form.appendChild(wrapper);
+    
+//   }
+function createField(form, field) {
+    const { placeholder, inputType, inputId, inputName, required } = field;
+
     const wrapper = document.createElement('div');
     wrapper.className = 'form-group';
-  
-    const label = document.createElement('label');
-    label.textContent = labelText;
-    label.htmlFor = inputId;
-    wrapper.appendChild(label);
-  
+
     let input;
     if (inputType === 'textarea') {
         input = document.createElement('textarea');
@@ -124,13 +198,16 @@ document.addEventListener('DOMContentLoaded', () => {
         input = document.createElement('input');
         input.type = inputType;
     }
+
     input.id = inputId;
     input.name = inputName;
+    input.placeholder = placeholder; 
     input.required = required;
+
     wrapper.appendChild(input);
-  
     form.appendChild(wrapper);
-  }
+}
+
   
   function createSelectField(form, labelText, selectId, selectName, options) {
     const wrapper = document.createElement('div');
@@ -157,24 +234,25 @@ document.addEventListener('DOMContentLoaded', () => {
     wrapper.appendChild(select);
     form.appendChild(wrapper);
   }
-  
   function createCheckboxField(form, labelText, checkboxId) {
     const wrapper = document.createElement('div');
-    wrapper.className = 'form-group';
-  
+    wrapper.className = 'form-group checkbox-group'; // Add the checkbox-group class
+
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.id = checkboxId;
-  
+    checkbox.classList.add('checkbox-input'); // Add the checkbox-input class
+
     const label = document.createElement('label');
     label.textContent = labelText;
     label.htmlFor = checkboxId;
-  
+
     wrapper.appendChild(checkbox);
     wrapper.appendChild(label);
-  
+
     form.appendChild(wrapper);
-  }
+}
+
 
   function getUrlParameter(name) {
     const urlParams = new URLSearchParams(window.location.search);
